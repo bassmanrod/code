@@ -1,0 +1,3 @@
+https://arstems.arkansas.gov/serverxml.asp
+  error: Connection-timeout
+ Critical

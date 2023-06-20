@@ -1,0 +1,115 @@
+#!/usr/bin/env python
+import socket
+import command
+import datetime
+import os
+from os import system
+import time
+import re
+import urllib.request
+import json
+from biotrackfunctions import *
+
+f = open('/usr/lib/xymon/server/ext/States/Arkansas/arkansas.json')
+state           = json.load(f)
+
+environment     = state['host']
+url             = state['state_url']
+print (url)
+production_site = state['environment']
+host = state['host']
+#shit = state['shit']
+a_path = state['a_path']
+a_folder = state['a_folder']
+test = "ar-httpcheck"
+#state = shit
+#a_path = a_path
+#a_folder = 'Arkansas' 
+bad_file = 'bad.txt'
+regex = state['regex']     
+prod_site = state['production_site']
+
+
+#a_path = '/usr/lib/xymon/server/ext/States'
+#a_folder = 'Arkansas'
+joined_path_bad = os.path.join(a_path, a_folder, bad_file)
+       
+socket.setdefaulttimeout(3)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+result = sock.connect_ex((host, 443))
+#print(result)
+
+if result != 0:
+    bad_socket()
+
+startTime = time.time()
+
+with urllib.request.urlopen(url) as url:
+    s = url.read()
+    #print(s)
+
+executionTime = (time.time() - startTime)
+how_long = float(executionTime)
+how_long = round(how_long, 2)
+
+## finally, sorry for the multiple how_longs....
+how_long = str(how_long)
+    
+#a_path = '/usr/lib/xymon/server/ext/States'
+#a_folder = 'Arkansas'
+bad_file = '/usr/lib/xymon/server/ext/States/Arkansas/matched.txt'
+joined_path_bad = os.path.join(a_path, a_folder, bad_file)
+joined_path_matched = os.path.join(a_path, a_folder, bad_file)
+n = open(joined_path_matched, "w")
+n.write(str(how_long) + '\n')
+n.close()
+
+x = datetime.datetime.now()
+#shit =  x.strftime("%c")
+now =  x.strftime("%c")
+   
+#if re.search(r'The Arkansas Department of Health and the Arkansas Department of Finance', s.decode('utf-8')):   
+if re.search(regex, s.decode('utf-8')):   
+       nomatch_file = 'nomatched.txt'
+       joined_path_nomatched = os.path.join(a_path, a_folder, nomatch_file)
+       f = open(joined_path_nomatched, "r")
+       file_contents = f.read()
+       COLOR = "green"
+       cmd = "{BB} {BBDISP} \"status {NODE}.{TEST} {COLOR} {NOW}\n {MSG}\n\"".format(
+       TEST = test,
+       BB = os.environ["BB"],
+       BBDISP = os.environ["BBDISP"],
+       COLOR = COLOR,
+       NOW = now,
+       #MSG = "time : " +  catshit,
+       MSG = "time : " +  how_long + " seconds",
+       NODE= "Arkansas-Traceability")
+       #NODE= prod_site)
+       print (prod_site, test, now, how_long)
+
+       os.system(cmd)
+       print(cmd)
+       exit()
+
+else:
+   
+       nomatch_file = 'nomatched.txt'
+       joined_path_nomatched = os.path.join(a_path, a_folder, nomatch_file)
+       f = open(joined_path_nomatched, "r")
+       file_contents = f.read()
+       #redHttpCheck(prod_site,test,file_contents,msg)
+       print ("shit")
+       print (shit)
+
+       COLOR = "red"
+       cmd = "{BB} {BBDISP} \"status {NODE}.{TEST} {COLOR} {NOW}\n {MSG}\n\"".format(
+       TEST = "ar-httpcheck",
+       BB = os.environ["BB"],
+       BBDISP = os.environ["BBDISP"],
+       COLOR = COLOR,
+       NOW = shit,
+       MSG = "We have a problem",
+       NODE= "Arkansas-Traceability"  )
+       os.system(cmd)
+       print(cmd)
+       exit()

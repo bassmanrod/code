@@ -1,0 +1,3 @@
+https://arstems.arkansas.gov/serverxml.asp
+ time : 0.5 seconds
+ Normal response authenticating to the API.

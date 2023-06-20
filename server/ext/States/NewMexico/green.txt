@@ -1,0 +1,3 @@
+https://arstems.arkansas.gov
+ time : 0.05 seconds
+ Normal response opening main site.

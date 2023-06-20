@@ -1,0 +1,13 @@
+ URL:    https://arstems.arkansas.gov
+  ERROR: Arkansas' Traceabilty main site failed to load!
+
+  TROUBLESHOOTING:
+  verify apache started on all apache servers
+  verify the router is up and iptables are running
+  verify apache has not exceeded its allowable connections
+  check cpu, disk, inode and memory metrics
+  verify DNS resolution
+
+  NOTE: This test runs every 60 seconds but only alerts every 10 minutes
+
+

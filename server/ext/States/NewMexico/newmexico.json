@@ -1,0 +1,21 @@
+{
+        "host":"arstems.arkansas.gov",
+        "test":"ar-httpcheck",
+        "state":"Arkansas",
+	"a_folder":"Arkansas",
+	"a_path":"/usr/lib/xymon/server/ext/States",
+	"shittest":"apilogin",
+	"xml_url":"https://arstems.arkansas.gov/serverxml.asp",
+	"state_url":"https://arstems.arkansas.gov",
+	"regex":"Questions regarding laboratories and testing should be directed to the Arkansas Department of Health",
+	"environment":"Arkansas-Traceabilty",
+	"shit":"Arkansas",
+	"port":"5432",
+	"ip":"3.17.78.180",
+	"database":"postgres",
+	"production_site":"Arkansas",
+	"http_test":"httpcheck",
+	"user":"postgres"
+}
+
+

@@ -1,0 +1,2 @@
+CRITICAL ERROR with Arkansas Traceability main site.
+ Recheck again: https://arstems.arkansas.gov

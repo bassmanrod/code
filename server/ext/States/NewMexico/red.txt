@@ -1,0 +1,15 @@
+ URL:    https://arstems.arkansas.gov
+  STATUS: CRITICAL_INACESSIBLE
+  ERROR:  time-out waiting for site to load
+  PURPOSE: web site load test
+
+  TROUBLESHOOTING:
+  verify apache started on all apache servers
+  verify the router is up and iptables are running
+  verify apache has not exceeded its allowable connections
+  check cpu, disk, inode and memory metrics
+  verify DNS resolution
+
+  NOTE: This test runs every 60 seconds but only alerts every 10 minutes
+
+
